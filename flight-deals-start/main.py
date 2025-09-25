@@ -13,11 +13,9 @@ flight_data = FlightData()
 period = []
 today = datetime.now().strftime("%Y-%m-%d")
 
-#Check for the flight for another 90 days
-for number_days in range(90):
+#Check for the flight for another X days
+for number_days in range(30):
     new_date = datetime.strptime(today, "%Y-%m-%d") + timedelta(days=number_days)
-
     flight_data.mulitple_city_flight_details(departure_date=new_date.strftime("%Y-%m-%d"))
-
 
 

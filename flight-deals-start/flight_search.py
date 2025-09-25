@@ -1,13 +1,17 @@
+import os
 import requests
 import json
+from dotenv import load_dotenv
 
-AMADEUS_API_KEY = "4mXIv6Uz4GHSK4M7Z7gaqBP23KJTP3JL"
-AMADEUS_API_SECRET = "aK4GP46rNVsSKTyA"
+load_dotenv()
+AMADEUS_API_KEY = os.getenv("AMADEUS_API_KEY")
+
+AMADEUS_API_SECRET = os.getenv("AMADEUS_API_SECRET")
 #______________________ GAINING ACCESS TOKEN
-AMADEUS_TOKEN_URL = "https://test.api.amadeus.com/v1/security/oauth2/token"
+AMADEUS_TOKEN_URL = os.getenv("AMADEUS_TOKEN_URL")
 #______________________
-AMADESU_SEARCH_URL = "https://test.api.amadeus.com/v2/shopping/flight-offers?"
-ACCESS_TOKEN = "0U9Iw2peYTjZ1ppfh4Wbhth0QqZG"
+AMADESU_SEARCH_URL = os.getenv("AMADESU_SEARCH_URL")
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 
 header = {
     "Authorization" : f"Bearer {ACCESS_TOKEN}"
@@ -42,7 +46,7 @@ class FlightSearch:
         }
 
         response = requests.get(url=f"{AMADESU_SEARCH_URL}{self.search_criteria}", headers=self.header)
-        print(json.dumps(response.json(), indent=2))
+        #print(json.dumps(response.json(), indent=2))
         return response.json()
 
     def getting_access_token(self):

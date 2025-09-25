@@ -1,6 +1,7 @@
 from data_manager import DataManager
 from flight_search import FlightSearch
 
+
 data_manager = DataManager()
 flight_search = FlightSearch()
 class FlightData:
@@ -13,9 +14,7 @@ class FlightData:
     def mulitple_city_flight_details(self,departure_date):
         access_token_response = flight_search.getting_access_token()
         for city in self.sheet_details['prices']:
-            print(city)
-            print(city["iataCode"], city['lowestPrice'])
-            flight_search.flight_data_search(
+            checked_flights = flight_search.flight_data_search(
                 origin="KRK",
                 destination=f"{city["iataCode"]}",
                 departure_date=f"{departure_date}",
@@ -25,6 +24,10 @@ class FlightData:
                 flight_numbers=1,
                 access_token=access_token_response
             )
+            if checked_flights["meta"]["count"] == 0:
+                print(f"No flight to {city["city"]} in date: {departure_date}")
+            elif checked_flights["meta"]["count"] != 0:
+                print(checked_flights) # Can do cosmetic changes for the output
 
 
 

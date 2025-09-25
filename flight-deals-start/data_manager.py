@@ -1,7 +1,9 @@
 import requests
+from dotenv import load_dotenv
+import os
 
-SHEETY_URL = "https://api.sheety.co/1e3077f783705e3aa36e06a3413c4177/czymDlaCiebieJestCzasWolny/prices"
-
+load_dotenv()
+SHEETY_URL = os.getenv("SHEETY_URL")
 class DataManager:
 
     def info_from_the_sheet(self):
